@@ -6,6 +6,7 @@ params = {'parameters[''title'']': '厨房',
           'parameters[''regionguid'']': '6101'}
 r = requests.post(url, params=params)
 content = r.content
-selector = etree.HTML(content)
-title=selector.xpath('//title/text()')
-print(str(title[0], 'utf-8'))
+selector = etree.HTML(content, parser=etree.HTMLParser(encoding='utf-8'))
+title = selector.xpath('//td[@title]')
+for element in title:
+    print(element.attrib)
