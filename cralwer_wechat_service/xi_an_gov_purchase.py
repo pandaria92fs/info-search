@@ -1,7 +1,7 @@
 from datetime import datetime
 import requests
 from lxml import etree
-from defaults import region_guid
+from cralwer_wechat_service.defaults import region_guid
 
 current_time = datetime.now()
 current_date = current_time.strftime("%Y-%m-%d")

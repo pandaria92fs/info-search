@@ -1,10 +1,8 @@
-import requests
-import json
 from cralwer_wechat_service.const import corp_id, secret
 import time
 import requests
 import json
-import xi_an_gov_purchase as worker
+from cralwer_wechat_service import xi_an_gov_purchase as worker
 
 
 class WeChat:
