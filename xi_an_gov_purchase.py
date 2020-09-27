@@ -24,7 +24,7 @@ def search_info(time):
         selector = etree.HTML(content, parser=etree.HTMLParser(encoding='utf-8'))
         title = selector.xpath('//td/@title')
         link = selector.xpath("//td/a[@href]")
-        print(title)
+        # print(title)
         for t, l in zip(title, link):
             dict_val = {"标题": t, "链接": l.attrib["href"], "日期": time}
             element_lst.append(dict_val)
