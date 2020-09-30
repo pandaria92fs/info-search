@@ -1,6 +1,6 @@
 import datetime
 
-from cralwer_wechat_service.const import corp_id, secret
+from const import corp_id, secret
 import time
 import requests
 import json
