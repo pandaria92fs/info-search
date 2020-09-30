@@ -1,8 +1,10 @@
+import datetime
+
 from cralwer_wechat_service.const import corp_id, secret
 import time
 import requests
 import json
-from cralwer_wechat_service import xi_an_gov_purchase as worker
+import xi_an_gov_purchase as worker
 
 
 class WeChat:
@@ -72,9 +74,15 @@ def listToString(s):
         # return string
     return str1
 
+
 if __name__ == '__main__':
     wx = WeChat()
     info_list = worker.info_list
-    wx.send_data("这是今天爬取到的信息！\n Python程序调用企业微信API,从自建应用“招标信息管理”发送给管理员的消息！")
-    wx.send_data(str(info_list))
-    wx.send_data("这是程序发送的第2条消息！")
+    wx.send_data("早上好！😊现在是" + datetime.datetime.now().strftime("%Y-%m-%d, %H:%M:%S"))
+    if info_list:
+        wx.send_data(
+            "这是今天爬取到的信息！这是正式版信息！请注意关注！")
+        wx.send_data(str(info_list)+ "\n"+"昨天已经推送过的消息注意重复信息！！！\n")
+    else:
+        wx.send_data("今日没有关于厨房,炊具,酒店,食堂,厨具的关键词消息推送 ")
+    wx.send_data("推送完毕!拜拜👋\n")
