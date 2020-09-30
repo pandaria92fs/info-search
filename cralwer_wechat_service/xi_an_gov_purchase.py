@@ -43,7 +43,7 @@ def search_info(time):
         selector = etree.HTML(content, parser=etree.HTMLParser(encoding='utf-8'))
         title = [str(s) for s in selector.xpath('//td/@title')]
         link = selector.xpath("//td/a[@href]")
-        print(title)
+        # print(title)
         for t, l in zip(title, link):
             for key in key_words:
                 if key in t:
@@ -55,4 +55,4 @@ def search_info(time):
 info_list = []
 info_list = search_info(current_date)
 
-print(info_list)
+# print(info_list)
