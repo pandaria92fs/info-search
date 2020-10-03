@@ -1,6 +1,5 @@
 import datetime
 
-from const import corp_id, secret
 import time
 import requests
 import json
@@ -9,8 +8,8 @@ import xi_an_gov_purchase as worker
 
 class WeChat:
     def __init__(self):
-        self.CORPID = corp_id  # 企业ID，在管理后台获取
-        self.CORPSECRET = secret  # 自建应用的Secret，每个自建应用里都有单独的secret
+        self.CORPID = 'wwc7a16e080c15cbe3'  # 企业ID，在管理后台获取
+        self.CORPSECRET = 'tLua3vWd3yDTvEfUUnJU7zZJMUWhpql28-h_P9DekhY'  # 自建应用的Secret，每个自建应用里都有单独的secret
         self.AGENTID = '1000002'  # 应用ID，在后台应用中获取
         self.TOUSER = "ChenXianHui|ChenBangMing|ZhuYun|HuangFu|ShuiLiuZhongXiaoSheng|moca|XiaoChouYu|YangJiao"  # 接收者用户名,多个用户用|分割
 
@@ -25,10 +24,10 @@ class WeChat:
 
     def get_access_token(self):
         try:
-            with open('./tmp/access_token.conf', 'r') as f:
+            with open('/root/info-search/cralwer_wechat_service/tmp/access_token.conf', 'r') as f:
                 t, access_token = f.read().split()
         except:
-            with open('./tmp/access_token.conf', 'w') as f:
+            with open('/root/info-search/cralwer_wechat_service/tmp/access_token.conf', 'w') as f:
                 access_token = self._get_access_token()
                 cur_time = time.time()
                 f.write('\t'.join([str(cur_time), access_token]))
@@ -38,7 +37,7 @@ class WeChat:
             if 0 < cur_time - float(t) < 7260:
                 return access_token
             else:
-                with open('./tmp/access_token.conf', 'w') as f:
+                with open('/root/info-search/cralwer_wechat_service/tmp/access_token.conf', 'w') as f:
                     access_token = self._get_access_token()
                     f.write('\t'.join([str(cur_time), access_token]))
                     return access_token
