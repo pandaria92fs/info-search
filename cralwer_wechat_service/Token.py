@@ -11,7 +11,7 @@ class WeChat:
         self.CORPID = 'wwc7a16e080c15cbe3'  # 企业ID，在管理后台获取
         self.CORPSECRET = 'tLua3vWd3yDTvEfUUnJU7zZJMUWhpql28-h_P9DekhY'  # 自建应用的Secret，每个自建应用里都有单独的secret
         self.AGENTID = '1000002'  # 应用ID，在后台应用中获取
-        self.TOUSER = "ChenXianHui|ChenBangMing|ZhuYun|HuangFu|ShuiLiuZhongXiaoSheng|moca|XiaoChouYu|YangJiao"  # 接收者用户名,多个用户用|分割
+        self.TOPARTY = '2'  # 接收者用户名,多个用户用|分割
 
     def _get_access_token(self):
         url = 'https://qyapi.weixin.qq.com/cgi-bin/gettoken'
@@ -45,7 +45,7 @@ class WeChat:
     def send_data(self, message):
         send_url = 'https://qyapi.weixin.qq.com/cgi-bin/message/send?access_token=' + self.get_access_token()
         send_values = {
-            "touser": self.TOUSER,
+            "toparty": self.TOPARTY,
             "msgtype": "text",
             "agentid": self.AGENTID,
             "text": {
