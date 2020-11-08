@@ -47,7 +47,7 @@ def search_info(time):
         for t, l in zip(title, link):
             for key in key_words:
                 if key in t:
-                    dict_val = {"标题": t, "链接": l.attrib["href"], "信息爬取日期": time}
+                    dict_val = {"标题": t, "链接": l.attrib["href"], "信息爬取日期": time, "信息来源网站": "陕西采购与招标网"}
                     element_lst.append(dict_val)
     return element_lst
 
