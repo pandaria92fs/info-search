@@ -3,7 +3,8 @@ import datetime
 import time
 import requests
 import json
-import xi_an_gov_purchase as worker
+import xi_an_gov_purchase as xi_an_gov
+import shan_xi_gov_purchase as shan_xi_gov
 
 
 class WeChat:
@@ -24,10 +25,12 @@ class WeChat:
 
     def get_access_token(self):
         try:
-            with open('/root/info-search/cralwer_wechat_service/tmp/access_token.conf', 'r') as f:
+            with open('/Users/clubfactory/Documents/practice/info-search/cralwer_wechat_service/tmp/access_token.conf',
+                      'r') as f:
                 t, access_token = f.read().split()
         except:
-            with open('/root/info-search/cralwer_wechat_service/tmp/access_token.conf', 'w') as f:
+            with open('/Users/clubfactory/Documents/practice/info-search/cralwer_wechat_service/tmp/access_token.conf',
+                      'w') as f:
                 access_token = self._get_access_token()
                 cur_time = time.time()
                 f.write('\t'.join([str(cur_time), access_token]))
@@ -37,7 +40,9 @@ class WeChat:
             if 0 < cur_time - float(t) < 7260:
                 return access_token
             else:
-                with open('/root/info-search/cralwer_wechat_service/tmp/access_token.conf', 'w') as f:
+                with open(
+                        '/Users/clubfactory/Documents/practice/info-search/cralwer_wechat_service/tmp/access_token.conf',
+                        'w') as f:
                     access_token = self._get_access_token()
                     f.write('\t'.join([str(cur_time), access_token]))
                     return access_token
@@ -54,9 +59,9 @@ class WeChat:
             "safe": "0"
         }
         send_msges = (bytes(json.dumps(send_values), 'utf-8'))
-        respone = requests.post(send_url, send_msges)
-        respone = respone.json()  # 当返回的数据是json串的时候直接用.json即可将respone转换成字典
-        return respone["errmsg"]
+        response = requests.post(send_url, send_msges)
+        response = response.json()  # 当返回的数据是json串的时候直接用.json即可将respone转换成字典
+        return response["errmsg"]
 
 
 # Python program to convert a list to string
@@ -76,12 +81,15 @@ def listToString(s):
 
 if __name__ == '__main__':
     wx = WeChat()
-    info_list = worker.info_list
+    xi_an_gov_info_list = xi_an_gov.info_list
+    shan_xi_gov_info_list = shan_xi_gov.search_info(shan_xi_gov.current_date)
+
+    info_list = xi_an_gov_info_list + shan_xi_gov_info_list
     wx.send_data("早上好！😊现在是" + datetime.datetime.now().strftime("%Y-%m-%d, %H:%M:%S"))
     if info_list:
         wx.send_data(
             "这是今天爬取到的信息！这是正式版信息！请注意关注！")
-        wx.send_data(str(info_list)+ "\n"+"昨天已经推送过的消息注意重复信息！！！\n")
+        wx.send_data(str(info_list) + "\n" + "昨天已经推送过的消息注意重复信息！！！\n")
     else:
         wx.send_data("今日没有关于厨房,炊具,酒店,食堂,厨具的关键词消息推送 ")
     wx.send_data("推送完毕!拜拜👋\n")

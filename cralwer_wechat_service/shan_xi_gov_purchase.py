@@ -3,7 +3,7 @@
 # @Author: XianHui chen
 # @File: shan_xi_gov_purchase.py
 # @Software:PyCharm
-# @description:山西采购与招标
+# @description:陕西采购与招标
 from datetime import datetime, timedelta
 import requests
 from lxml import etree, html
@@ -16,8 +16,7 @@ yesterday = datetime.now() + timedelta(days=-1)
 
 def search_info(time):
     # tuple 用数字来retrieve
-    key_words = ["空港"]
-    # print(yesterday.strftime("%Y-%m-%d"))
+    key_words = ["排烟", "厨", "炊具", "酒店"]
     element_lst = []
     url = "http://bulletin.sntba.com/xxfbcmses/search/bulletin.html"
     params = {
@@ -36,7 +35,7 @@ def search_info(time):
     for t, l in zip(title, link):
         for key in key_words:
             if key in t:
-                dict_val = {"标题": t, "链接": l, "信息爬取日期": time, "信息来源网站": "陕西采购与招标网"}
+                dict_val = {"标题": t, "链接": l, "信息爬取日期": time, "信息来源网站": "陕西省政府采购网"}
                 element_lst.append(dict_val)
     return element_lst
 
