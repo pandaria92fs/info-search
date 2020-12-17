@@ -1,3 +1,4 @@
+# -*- coding: utf-8 -*-
 import requests
 import lxml.etree
 from datetime import datetime, timedelta
