@@ -5,7 +5,7 @@ import requests
 import json
 import xi_an_gov_purchase as xi_an_gov
 import shan_xi_gov_purchase as shan_xi_gov
-
+import second_part
 
 class WeChat:
     def __init__(self):
@@ -83,8 +83,8 @@ if __name__ == '__main__':
     wx = WeChat()
     xi_an_gov_info_list = xi_an_gov.info_list
     shan_xi_gov_info_list = shan_xi_gov.search_info(shan_xi_gov.current_date)
-
-    info_list = xi_an_gov_info_list + shan_xi_gov_info_list
+    second_part_list = second_part.run()
+    info_list = xi_an_gov_info_list + shan_xi_gov_info_list + second_part_list
     wx.send_data("早上好！😊现在是" + datetime.datetime.now().strftime("%Y-%m-%d, %H:%M:%S"))
     if info_list:
         wx.send_data(
