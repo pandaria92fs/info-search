@@ -1,12 +1,13 @@
 # -*- coding: utf-8 -*-
 import datetime
-
-import time
-import requests
 import json
-import xi_an_gov_purchase as xi_an_gov
-import shan_xi_gov_purchase as shan_xi_gov
+import time
+
+import requests
+
 import second_part
+import shan_xi_gov_purchase as shan_xi_gov
+import xi_an_gov_purchase as xi_an_gov
 
 
 class WeChat:
@@ -27,11 +28,11 @@ class WeChat:
 
     def get_access_token(self):
         try:
-            with open('/Users/clubfactory/Documents/practice/info-search/cralwer_wechat_service/tmp/access_token.conf',
+            with open('/root/info-search/cralwer_wechat_service/tmp/access_token.conf',
                       'r') as f:
                 t, access_token = f.read().split()
         except:
-            with open('/Users/clubfactory/Documents/practice/info-search/cralwer_wechat_service/tmp/access_token.conf',
+            with open('/root/info-search/cralwer_wechat_service/tmp/access_token.conf',
                       'w') as f:
                 access_token = self._get_access_token()
                 cur_time = time.time()
@@ -43,7 +44,7 @@ class WeChat:
                 return access_token
             else:
                 with open(
-                        '/Users/clubfactory/Documents/practice/info-search/cralwer_wechat_service/tmp/access_token.conf',
+                        '/root/info-search/cralwer_wechat_service/tmp/access_token.conf',
                         'w') as f:
                     access_token = self._get_access_token()
                     f.write('\t'.join([str(cur_time), access_token]))
@@ -88,6 +89,7 @@ def determent_second(list):
             flag = True
     return flag
 
+
 key_words = ["排烟", "厨", "炊具", "餐具", "酒店"]
 
 if __name__ == '__main__':
@@ -106,14 +108,14 @@ if __name__ == '__main__':
 
     wx.send_data("以下推送来自于乙方宝，请持续关注！ ")
     if determent_second(second_part_list):
-        for i in range(0,len(second_part_list)-1):
+        for i in range(0, len(second_part_list) - 1):
             if len(second_part_list[i]) is not 0:
                 wx.send_data(
                     "这是今天爬取到的乙方宝信息！这是正式版信息！请注意关注！")
                 wx.send_data(str(second_part_list[i]) + "昨天已经推送过的消息注意重复信息！！！\n")
             else:
                 wx.send_data(
-                    "关键词：" + key_words[i] +"结果为空！")
+                    "关键词：" + key_words[i] + "结果为空！")
     else:
         wx.send_data("今日乙方宝没有关于厨房,炊具,酒店,食堂,厨具的关键词消息推送 ")
 
