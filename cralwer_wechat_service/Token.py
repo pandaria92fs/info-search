@@ -7,6 +7,7 @@ import xi_an_gov_purchase as xi_an_gov
 import shan_xi_gov_purchase as shan_xi_gov
 import second_part
 
+
 class WeChat:
     def __init__(self):
         self.CORPID = 'wwc7a16e080c15cbe3'  # 企业ID，在管理后台获取
@@ -79,17 +80,40 @@ def listToString(s):
     return str1
 
 
+def determent_second(list):
+    flag = False
+    for i in list:
+        if len(i) is not 0:
+            flag = True
+    return flag
+
+key_words = ["排烟", "厨", "炊具", "餐具", "酒店"]
+
 if __name__ == '__main__':
     wx = WeChat()
     xi_an_gov_info_list = xi_an_gov.info_list
     shan_xi_gov_info_list = shan_xi_gov.search_info(shan_xi_gov.current_date)
     second_part_list = second_part.run()
-    info_list = xi_an_gov_info_list + shan_xi_gov_info_list + second_part_list
+    info_list = xi_an_gov_info_list + shan_xi_gov_info_list
     wx.send_data("早上好！😊现在是" + datetime.datetime.now().strftime("%Y-%m-%d, %H:%M:%S"))
     if info_list:
         wx.send_data(
             "这是今天爬取到的信息！这是正式版信息！请注意关注！")
         wx.send_data(str(info_list) + "\n" + "昨天已经推送过的消息注意重复信息！！！\n")
     else:
-        wx.send_data("今日没有关于厨房,炊具,酒店,食堂,厨具的关键词消息推送 ")
-    wx.send_data("推送完毕!拜拜👋\n")
+        wx.send_data("今日政府采购没有关于厨房,炊具,酒店,食堂,厨具的关键词消息推送\n ")
+
+    wx.send_data("以下推送来自于乙方宝，请持续关注！ ")
+    if determent_second(second_part_list):
+        for i in range(0,len(second_part_list)-1):
+            if len(second_part_list[i]) is not 0:
+                wx.send_data(
+                    "这是今天爬取到的乙方宝信息！这是正式版信息！请注意关注！")
+                wx.send_data(str(second_part_list[i]) + "昨天已经推送过的消息注意重复信息！！！\n")
+            else:
+                wx.send_data(
+                    "关键词：" + key_words[i] +"结果为空！")
+    else:
+        wx.send_data("今日乙方宝没有关于厨房,炊具,酒店,食堂,厨具的关键词消息推送 ")
+
+    wx.send_data("以上就是今天的全部!拜拜👋～\n")
