@@ -55,4 +55,4 @@ def search_info(time):
 
 info_list = []
 info_list = search_info(current_date)
-print(info_list)
+# print(info_list)
