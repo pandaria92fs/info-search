@@ -1,8 +1,8 @@
 # -*- coding: utf-8 -*-
 from datetime import datetime, timedelta
+
 import requests
 from lxml import etree
-from lxml.html import fromstring, tostring
 
 current_time = datetime.now()
 current_date = current_time.strftime("%Y-%m-%d")
@@ -55,5 +55,4 @@ def search_info(time):
 
 info_list = []
 info_list = search_info(current_date)
-
-# print(info_list)
+print(info_list)
