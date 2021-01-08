@@ -60,7 +60,7 @@ def search_info(pageNo, keyword):
 
 def run():
     lst = []
-    key_words = ["排烟", "厨", "炊具", "餐具", "酒店"]
+    key_words = ["排烟", "厨", "炊具", "餐具", "酒"]
     for key in key_words:
         lst.append(search_info(1, key))
     return lst
