@@ -44,17 +44,18 @@ def search_info(pageNo, keyword):
     # content = r.content
     selector = etree.HTML(r)
     raw_titles = selector.xpath('//tr/td/a')
-    title_times = selector.xpath('//tr/td[contains(text(),"2020")]/text()')
+    title_times = selector.xpath('//tr/td[contains(text(),"2021")]/text()')
     link = selector.xpath('//tr/td/a/@href')
     element_lst = []
-    for i in range(0, len(raw_titles) - 1):
+    for i in range(0, len(title_times) - 1):
         if str(title_times[i]) == current_date or str(title_times[i]) == yesterday.strftime("%Y/%m/%d"):
             title = raw_titles[i].xpath("string(.)")
             dict_val = {"标题": title, "链接": "http://www.yfbzb.com/" + link[i], "信息发布日期": title_times[i], "信息来源网站": "乙方宝"}
             element_lst.append(dict_val)
-    if title_times[-1] is current_date:
-        pageNo += 1
-        search_info(pageNo, keyword)
+    if len(title_times) is not 0:
+        if title_times[-1] is current_date:
+            pageNo += 1
+            search_info(pageNo, keyword)
     return element_lst
 
 
