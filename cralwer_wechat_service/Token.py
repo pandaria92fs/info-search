@@ -8,6 +8,7 @@ import requests
 import second_part
 import shan_xi_gov_purchase as shan_xi_gov
 import xi_an_gov_purchase as xi_an_gov
+from time import sleep
 
 
 class WeChat:
