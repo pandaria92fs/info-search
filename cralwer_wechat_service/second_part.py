@@ -16,7 +16,7 @@ yesterday = datetime.now() + timedelta(days=-1)
 
 def search_info(pageNo, keyword):
     # tuple 用数字来retrieve
-    key_words = ["排烟", "厨", "炊具", "餐具", "酒店"]
+    key_words = ["排烟","一体机","洗碗机","油烟","炊","冰柜","排放","冷库","消毒柜","灶","厨", "炊具", "餐具", "酒店"]
     element_lst = []
     url = "http://www.yfbzb.com/search/invitedBidSearch"
 
@@ -61,9 +61,10 @@ def search_info(pageNo, keyword):
 
 def run():
     lst = []
-    key_words = ["排烟", "厨", "炊具", "餐具", "酒"]
+    key_words = ["排烟","一体机","洗碗机","油烟","炊","冰柜","排放","冷库","消毒柜","灶","厨", "炊具", "餐具", "酒店"]
     for key in key_words:
         lst.append(search_info(1, key))
+    print(lst)
     return lst
 
 

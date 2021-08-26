@@ -31,7 +31,7 @@ def search_info(time):
     element_lst = []
     for i, k in region_guid.items():
         # tuple 用数字来retrieve
-        key_words = ["排烟", "厨", "炊具", "酒店"]
+        key_words = ["排烟","一体机","洗碗机","油烟","炊","冰柜","排放","冷库","消毒柜","灶","厨", "炊具", "餐具", "酒店"]
         # print(yesterday.strftime("%Y-%m-%d"))
         url = "http://www.ccgp-shaanxi.gov.cn/notice/noticeaframe.do?noticetype=3&isgovertment="
         params = {'parameters[''title'']': '',
